@@ -1,0 +1,909 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>刘晨阳 · 视觉设计作品集 2026</title>
+<meta name="description" content="刘晨阳的视觉设计作品集：山野信号、DAYFORM 日萃、MALLOW PLANET、MEOW EASY 四个完整品牌项目。">
+<meta name="theme-color" content="#F5F5F7">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23171712'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%234E6BFF'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#F5F5F7; --surface:#FFFFFF; --surface-2:#FAFAFC;
+    --ink:#1D1D1F; --ink-2:#4A4A4F; --muted:#86868B;
+    --hair:rgba(0,0,0,.10); --hair-2:rgba(0,0,0,.055);
+    --accent:#0071E3;
+    --pad:clamp(20px, 5vw, 72px);
+    --bar:56px;
+    --r:26px; --r-lg:40px;
+    --ease:cubic-bezier(.22,.61,.36,1);
+    --ease-2:cubic-bezier(.16,1,.3,1);
+  }
+  *{box-sizing:border-box}
+  html{
+    scroll-behavior:smooth; -webkit-text-size-adjust:100%;
+    background-color:var(--bg); background-repeat:no-repeat; background-attachment:fixed;
+    background-image:
+      radial-gradient(120% 70% at 50% -18%, #FFFFFF 0%, rgba(255,255,255,0) 62%),
+      radial-gradient(52% 44% at 88% 4%, rgba(0,113,227,.055), rgba(0,113,227,0) 70%),
+      radial-gradient(46% 40% at 6% 34%, rgba(156,123,224,.045), rgba(156,123,224,0) 72%),
+      radial-gradient(50% 40% at 70% 82%, rgba(127,160,90,.04), rgba(127,160,90,0) 72%);
+  }
+  body{
+    margin:0; background:transparent; color:var(--ink);
+    font-family:-apple-system,"SF Pro Display","Helvetica Neue","Inter","PingFang SC","Microsoft YaHei","Segoe UI",system-ui,sans-serif;
+    font-size:16px; line-height:1.6; letter-spacing:-.005em;
+    -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  /* very fine noise so large flat areas never band */
+  body::after{
+    content:""; position:fixed; inset:0; z-index:-1; pointer-events:none;
+    background-image:url(assets/grain.png); background-size:180px 180px;
+    opacity:.16; mix-blend-mode:soft-light;
+  }
+  ::selection{background:var(--ink); color:#fff}
+  img{display:block; max-width:100%}
+  a{color:inherit; text-decoration:none}
+  button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
+  h1,h2,h3,p,ol,ul,figure{margin:0; padding:0}
+  ol,ul{list-style:none}
+  :focus-visible{outline:2px solid var(--accent); outline-offset:3px}
+
+  #cur{position:fixed; top:0; left:0; width:8px; height:8px; border-radius:50%; background:var(--ink);
+    z-index:120; pointer-events:none; opacity:0; transform:translate(-50%,-50%);
+    transition:width .35s var(--ease-2), height .35s var(--ease-2), opacity .3s;}
+  #cur.on{opacity:.55}
+  #cur.big{width:44px; height:44px; background:transparent; border:1px solid var(--ink); opacity:.4}
+
+  /* ---------- glass top bar ---------- */
+  .topbar{
+    position:fixed; inset:0 0 auto; height:var(--bar); z-index:90;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0 var(--pad); gap:24px;
+    border-bottom:1px solid transparent;
+    transition:background .5s var(--ease), border-color .5s, backdrop-filter .5s;
+  }
+  .topbar.solid{background:rgba(245,245,247,.72); backdrop-filter:blur(20px) saturate(1.6); border-bottom-color:var(--hair-2)}
+  .brand{display:flex; align-items:baseline; gap:10px; letter-spacing:.01em}
+  .brand b{font-size:14.5px; font-weight:600}
+  .brand span{font-size:10px; letter-spacing:.26em; color:var(--muted); font-weight:500}
+  .nav{display:flex; gap:28px; font-size:12.5px; letter-spacing:.02em; color:var(--ink-2)}
+  .nav a{position:relative; padding:6px 0; transition:color .3s}
+  .nav a::after{content:""; position:absolute; left:0; right:0; bottom:0; height:1px; background:var(--ink); transform:scaleX(0); transform-origin:left; transition:transform .45s var(--ease-2)}
+  .nav a:hover::after,.nav a.on::after{transform:scaleX(1)}
+  .nav a:hover,.nav a.on{color:var(--ink)}
+  .progress{position:fixed; top:0; left:0; height:2px; width:100%; z-index:96; background:transparent}
+  .progress i{display:block; height:100%; width:0; background:var(--accent); transition:width .1s linear}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative; min-height:100svh; display:flex; flex-direction:column; justify-content:flex-start;
+    padding:calc(var(--bar) + 6vh) var(--pad) 0; overflow:hidden}
+  .aurora{position:absolute; inset:-16% -14% auto; height:122%; pointer-events:none; filter:blur(88px); opacity:.92}
+  .aurora i{position:absolute; border-radius:50%; display:block; will-change:transform}
+  .aurora i:nth-child(1){width:58vw; height:58vw; left:48%; top:-24%; background:radial-gradient(circle, rgba(0,113,227,.34), rgba(0,113,227,0) 66%); animation:drift1 26s var(--ease) infinite alternate}
+  .aurora i:nth-child(2){width:46vw; height:46vw; left:-14%; top:10%; background:radial-gradient(circle, rgba(122,110,230,.26), rgba(122,110,230,0) 68%); animation:drift2 32s var(--ease) infinite alternate}
+  .aurora i:nth-child(3){width:40vw; height:40vw; left:24%; top:40%; background:radial-gradient(circle, rgba(0,86,180,.16), rgba(0,86,180,0) 70%); animation:drift3 38s var(--ease) infinite alternate}
+  .aurora i:nth-child(4){width:34vw; height:34vw; left:72%; top:54%; background:radial-gradient(circle, rgba(255,168,120,.20), rgba(255,168,120,0) 70%); animation:drift1 44s var(--ease) infinite alternate-reverse}
+  @keyframes drift1{to{transform:translate3d(-6%, 8%, 0) scale(1.12)}}
+  @keyframes drift2{to{transform:translate3d(9%, -6%, 0) scale(1.08)}}
+  @keyframes drift3{to{transform:translate3d(-8%, -10%, 0) scale(1.15)}}
+
+  .hero-inner{flex:1; display:flex; flex-direction:column; justify-content:center; position:relative; max-width:1500px; margin:0 auto; width:100%}
+  .hero-grid{display:grid; grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr); gap:clamp(26px,4.4vw,68px); align-items:center; width:100%}
+  .hero-txt{min-width:0}
+  .eyebrow{font-size:11px; letter-spacing:.34em; color:var(--muted); text-transform:uppercase}
+  .hero h1{
+    font-size:clamp(58px, 13vw, 176px); line-height:.86; letter-spacing:-.055em;
+    font-weight:600; margin:clamp(12px,1.8vh,22px) 0 0;
+    animation:maskUp 1.2s var(--ease-2) .1s both;
+  }
+  .hero h1 small{
+    display:block; font-size:clamp(10px,1.15vw,16px); font-weight:500; letter-spacing:.4em;
+    color:var(--muted); margin-top:clamp(16px,2.2vh,26px);
+    animation:up .9s var(--ease-2) .55s both;
+  }
+  .hero .eyebrow{animation:up .8s var(--ease-2) both}
+  .hero-deck{
+    margin:0; position:relative; border-radius:22px; overflow:hidden; background:var(--surface);
+    border:1px solid var(--hair-2);
+    box-shadow:0 1px 2px rgba(0,0,0,.05), 0 50px 90px -46px rgba(0,0,0,.42);
+    animation:up 1.2s var(--ease-2) .3s both;
+  }
+  .hd-track{position:relative; aspect-ratio:16/9; background:#0E0E10; cursor:pointer}
+  .hd-img{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0;
+    transform:scale(1.03); transition:opacity 1s var(--ease-2), transform 1.6s var(--ease-2);
+  }
+  .hd-img.on{opacity:1; transform:none}
+  .hd-bar{
+    display:flex; align-items:center; justify-content:space-between; gap:14px;
+    padding:11px 14px 11px 16px; border-top:1px solid var(--hair-2);
+    font-size:10px; letter-spacing:.2em; color:var(--muted); text-transform:uppercase;
+  }
+  .hd-name{display:flex; align-items:center; gap:9px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  .hd-name b{color:var(--accent); font-weight:600; letter-spacing:.1em}
+  .hd-dots{display:flex; gap:6px; flex:0 0 auto}
+  .hd-dots button{width:16px; height:3px; border-radius:2px; background:var(--hair); transition:.45s var(--ease-2)}
+  .hd-dots button.on{width:26px; background:var(--ink)}
+  .role{font-size:clamp(15px,1.5vw,19px); color:var(--ink-2); line-height:1.6; margin-top:clamp(20px,3vh,32px)}
+  .role .l{display:block; white-space:nowrap; animation:up .9s var(--ease-2) both}
+  .role .l:nth-child(1){animation-delay:.62s}
+  .role .l:nth-child(2){animation-delay:.72s}
+  .role b{color:var(--ink); font-weight:600}
+  .hero-meta{font-size:12px; letter-spacing:.02em; color:var(--muted); margin-top:clamp(14px,2vh,20px); animation:up 1s var(--ease-2) .8s both}
+  .ticker{position:relative; border-top:1px solid var(--hair-2); border-bottom:1px solid var(--hair-2); overflow:hidden; padding:14px 0; margin:0 calc(var(--pad) * -1)}
+  .ticker div{display:flex; gap:0; width:max-content; will-change:transform}
+  .ticker span{font-size:11.5px; letter-spacing:.22em; color:var(--muted); text-transform:uppercase; padding:0 22px; border-right:1px solid var(--hair-2); white-space:nowrap}
+  .scroll-cue{display:flex; align-items:center; gap:10px; margin:0 auto; padding:clamp(22px,4vh,40px) 0 26px; font-size:11px; letter-spacing:.24em; color:var(--muted); text-transform:uppercase}
+  .scroll-cue i{display:block; width:1px; height:34px; background:linear-gradient(var(--muted),transparent); animation:drop 2.4s var(--ease) infinite}
+  @keyframes drop{0%{transform:scaleY(.2); transform-origin:top} 60%{transform:scaleY(1)} 100%{transform:scaleY(.2); transform-origin:bottom}}
+  @keyframes up{from{opacity:0; transform:translateY(16px)} to{opacity:1; transform:none}}
+  @keyframes maskUp{from{clip-path:inset(0 0 102% 0); transform:translateY(12px)} to{clip-path:inset(0 0 -12% 0); transform:none}}
+
+  /* ---------- sections ---------- */
+  section{scroll-margin-top:var(--bar)}
+  .wrap{max-width:1500px; margin:0 auto; padding:0 var(--pad)}
+  .sec-head{position:relative; display:grid; grid-template-columns:1fr auto; align-items:end; gap:20px; padding:clamp(90px,13vh,160px) 0 clamp(26px,3.6vh,44px)}
+  .sec-head::after{content:""; position:absolute; left:0; right:0; bottom:0; height:1px; background:var(--hair); transform:scaleX(0); transform-origin:left; transition:transform 1.3s var(--ease-2) .1s}
+  .sec-head.in::after{transform:scaleX(1)}
+  .sec-head h2{font-size:clamp(30px,3.4vw,50px); letter-spacing:-.03em; font-weight:600; margin-top:12px}
+  .sec-head .note{font-size:13px; color:var(--muted); max-width:40ch; line-height:1.75; text-align:right; letter-spacing:0}
+
+  /* ---------- index card ---------- */
+  .index{
+    margin-top:clamp(18px,3vh,34px); background:var(--surface); border-radius:var(--r);
+    box-shadow:0 1px 2px rgba(0,0,0,.04), 0 24px 60px -40px rgba(0,0,0,.30);
+    padding:8px clamp(14px,2.4vw,30px); overflow:hidden;
+  }
+  .row{position:relative; display:grid; grid-template-columns:64px 1fr auto 34px; align-items:center; gap:24px;
+    padding:clamp(20px,3vh,30px) 0; border-bottom:1px solid var(--hair-2); isolation:isolate;
+    transition:padding-left .6s var(--ease-2)}
+  .row::before{content:""; position:absolute; inset:0 -14px; z-index:-1; background:var(--surface-2); opacity:0; transition:opacity .45s var(--ease)}
+  .row:last-child{border-bottom:0}
+  .row:hover{padding-left:12px}
+  .row:hover::before{opacity:1}
+  .row .n{font-size:12px; letter-spacing:.14em; color:var(--muted); font-variant-numeric:tabular-nums; transition:color .4s}
+  .row:hover .n{color:var(--accent)}
+  .row .t{display:flex; align-items:baseline; gap:16px; flex-wrap:wrap}
+  .row .t b{font-size:clamp(21px,2.4vw,32px); font-weight:600; letter-spacing:-.03em}
+  .row .t em{font-style:normal; font-size:11px; letter-spacing:.22em; color:var(--muted); text-transform:uppercase}
+  .row .k{font-size:12px; color:var(--muted); letter-spacing:0; text-align:right}
+  .row .go{font-size:17px; color:var(--muted); transform:translateX(-6px); opacity:0; transition:.45s var(--ease-2)}
+  .row:hover .go{transform:none; opacity:1; color:var(--ink)}
+  #peek{position:fixed; z-index:80; width:300px; aspect-ratio:16/9; border-radius:12px; overflow:hidden;
+    pointer-events:none; opacity:0; transform:translate(-50%,-50%) scale(.94);
+    transition:opacity .4s var(--ease-2), transform .55s var(--ease-2);
+    box-shadow:0 30px 70px -20px rgba(0,0,0,.42), 0 0 0 1px var(--hair-2); background:var(--surface-2)}
+  #peek.on{opacity:1; transform:translate(-50%,-50%) scale(1)}
+  #peek img{width:100%; height:100%; object-fit:cover}
+
+  /* ---------- project ---------- */
+  .project{padding:clamp(70px,11vh,130px) 0 clamp(28px,4vh,52px); position:relative}
+  .p-head{display:grid; grid-template-columns:minmax(0,1.12fr) minmax(0,.8fr); gap:clamp(24px,4vw,64px); align-items:start}
+  .p-num{font-size:11.5px; letter-spacing:.34em; font-weight:600; opacity:.9; transform:translateY(var(--py,0px)); will-change:transform}
+  .p-num::after{content:""; display:inline-block; width:26px; height:1px; background:currentColor; vertical-align:middle; margin-left:14px; opacity:.5}
+  .p-title{margin-top:14px}
+  .p-title h3{font-size:clamp(32px,4.6vw,66px); line-height:1.02; letter-spacing:-.045em; font-weight:600}
+  .p-title .en{display:block; font-size:11px; letter-spacing:.28em; color:var(--muted); margin-top:14px; text-transform:uppercase}
+  .p-desc{font-size:clamp(14px,1.1vw,16px); color:var(--ink-2); line-height:1.9; margin-top:24px; max-width:54ch; letter-spacing:0}
+  .p-side{border-top:1px solid var(--hair); padding-top:20px; margin-top:8px}
+  .p-side dt{font-size:10px; letter-spacing:.22em; color:var(--muted); text-transform:uppercase; margin-bottom:8px}
+  .p-side dd{margin:0 0 20px; font-size:13px; color:var(--ink-2); line-height:1.8}
+  .chips{display:flex; flex-wrap:wrap; gap:7px}
+  .chips span{font-size:11.5px; color:var(--ink-2); background:var(--surface); border:1px solid var(--hair-2); border-radius:999px; padding:5px 12px; transition:.35s var(--ease)}
+  .chips span:hover{background:var(--ink); border-color:var(--ink); color:#fff}
+
+  /* deck as an Apple-style tile */
+  .deck{
+    margin-top:clamp(30px,4.4vh,52px); position:relative; background:var(--surface);
+    border-radius:var(--r-lg); padding:clamp(12px,1.6vw,22px);
+    box-shadow:0 1px 2px rgba(0,0,0,.05), 0 40px 90px -50px rgba(0,0,0,.35);
+    transition:box-shadow .6s var(--ease), transform .6s var(--ease);
+  }
+  .deck-track{display:flex; gap:clamp(8px,1vw,14px); overflow-x:auto; overscroll-behavior-x:contain;
+    scroll-snap-type:x mandatory; padding-bottom:2px; cursor:grab; scrollbar-width:none; border-radius:calc(var(--r-lg) - 14px)}
+  .deck-track::-webkit-scrollbar{display:none}
+  .deck-track.dragging{cursor:grabbing; scroll-snap-type:none; scroll-behavior:auto}
+  .deck-track.gliding{scroll-snap-type:none}
+  .slide{flex:0 0 min(84vw, 1216px); aspect-ratio:16/9; scroll-snap-align:center;
+    border-radius:14px; overflow:hidden; background:var(--surface-2); position:relative;
+    opacity:.55; transition:opacity .7s var(--ease), transform .8s var(--ease-2)}
+  .slide.is-on{opacity:1}
+  .slide:first-child{scroll-snap-align:start}
+  .slide img{width:100%; height:100%; object-fit:cover; user-select:none; -webkit-user-drag:none}
+  .slide::after{content:attr(data-i); position:absolute; left:12px; bottom:10px; font-size:10px; letter-spacing:.18em; color:#fff; mix-blend-mode:difference; opacity:.85}
+  .deck-bar{display:flex; align-items:center; gap:18px; padding:14px clamp(4px,.6vw,10px) 2px}
+  .deck-bar .cnt{font-size:11px; letter-spacing:.16em; color:var(--muted); font-variant-numeric:tabular-nums; min-width:74px}
+  .deck-bar .track{flex:1; height:1px; background:var(--hair); position:relative; overflow:hidden; border-radius:1px}
+  .deck-bar .track i{position:absolute; inset:0 auto 0 0; width:0; background:var(--ink); transition:width .25s var(--ease)}
+  .deck-bar .hint{font-size:11px; letter-spacing:.06em; color:var(--muted)}
+  .arrows{display:flex; gap:8px}
+  .arrows button{width:36px; height:36px; border:1px solid var(--hair); border-radius:50%; display:grid; place-items:center; transition:.35s var(--ease-2); color:var(--ink-2)}
+  .arrows button:hover{border-color:var(--ink); color:#fff; background:var(--ink); transform:scale(1.04)}
+  .arrows svg{width:13px; height:13px; stroke:currentColor; fill:none; stroke-width:1.7}
+
+  /* ---------- about ---------- */
+  .about-grid{display:grid; grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr); gap:clamp(30px,5.2vw,80px); align-items:start; padding:clamp(22px,3.2vh,42px) 0 clamp(56px,8vh,96px)}
+  .facts{margin:0 0 28px}
+  .facts > div{display:grid; grid-template-columns:62px minmax(0,1fr); gap:18px; align-items:baseline; padding:11px 0; border-bottom:1px solid var(--hair-2)}
+  .facts dt{margin:0; font-size:9.5px; letter-spacing:.26em; color:var(--muted); text-transform:uppercase; font-weight:600}
+  .facts dd{margin:0; font-size:14.5px; color:var(--ink); line-height:1.6}
+  .about-txt p{color:var(--ink-2); font-size:clamp(14px,1.05vw,15.5px); line-height:2.05; margin:0; max-width:33em}
+  .about-txt p + p{margin-top:10px}
+  .about-side h4{font-size:10px; letter-spacing:.24em; color:var(--muted); text-transform:uppercase; margin:0 0 10px; font-weight:600}
+  .about-side ul + h4{margin-top:54px}
+  .list-honor li{font-size:13.5px; color:var(--ink-2); padding:12px 0; border-bottom:1px solid var(--hair-2); display:flex; gap:14px; line-height:1.6; transition:.4s var(--ease)}
+  .list-honor li:hover{padding-left:8px; color:var(--ink)}
+  .list-honor li i{font-style:normal; color:var(--muted); font-size:10.5px; letter-spacing:.12em; min-width:20px; padding-top:2px}
+  .skills{display:flex; flex-wrap:wrap; gap:8px}
+  .about-side h4:first-child{margin-top:10px}
+
+  /* ---------- contact: plain on the page, no card ---------- */
+  .contact{margin:0 var(--pad); padding:clamp(40px,6vh,76px) 0 clamp(8px,1.6vh,16px); position:relative}
+  .contact .wrap{padding:0; max-width:none}
+  .contact .eyebrow{color:var(--muted)}
+  .contact h2{font-size:clamp(38px,7.4vw,112px); line-height:.94; letter-spacing:-.05em; font-weight:600; margin-top:14px}
+  .contact h2 .ln{display:block; overflow:hidden}
+  .contact h2 .ln span{display:block; transform:translateY(104%)}
+  .contact.in h2 .ln span{transform:none; transition:transform 1.1s var(--ease-2)}
+  .contact.in h2 .ln:nth-child(2) span{transition-delay:.12s}
+  .contact-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:24px; margin-top:clamp(34px,5vh,58px); padding-top:24px; border-top:1px solid var(--hair)}
+  .contact-grid div span{display:block; font-size:10px; letter-spacing:.22em; color:var(--muted); text-transform:uppercase; margin-bottom:8px}
+  .contact-grid div b{font-weight:500; font-size:14.5px; color:var(--ink-2)}
+  footer{display:flex; flex-wrap:wrap; gap:14px 30px; justify-content:space-between; padding:24px 0 30px; margin-top:clamp(34px,5vh,58px); border-top:1px solid var(--hair); font-size:11px; letter-spacing:.02em; color:var(--muted)}
+  .btn{display:inline-flex; align-items:center; gap:10px; margin-top:30px; padding:13px 22px; background:var(--ink); color:#fff; border:1px solid transparent; border-radius:999px; font-size:12.5px; letter-spacing:.02em; transition:.35s var(--ease-2)}
+  .btn:hover{transform:translateY(-2px); box-shadow:0 14px 30px -12px rgba(0,0,0,.4)}
+  .btn svg{width:13px; height:13px; stroke:currentColor; fill:none; stroke-width:1.7}
+
+  /* ---------- lightbox ---------- */
+  .lb{position:fixed; inset:0; z-index:100; display:none; flex-direction:column; background:rgba(16,16,18,.94); backdrop-filter:blur(24px) saturate(1.2); color:#F5F5F7}
+  .lb.on{display:flex; animation:lbIn .4s var(--ease-2)}
+  @keyframes lbIn{from{opacity:0} to{opacity:1}}
+  .lb-top{display:flex; align-items:center; justify-content:space-between; padding:16px clamp(14px,2.4vw,30px); gap:16px}
+  .lb-top .info{font-size:11.5px; letter-spacing:.14em; color:rgba(245,245,247,.5); display:flex; gap:14px; align-items:center}
+  .lb-top .info b{color:#F5F5F7; font-weight:500}
+  .lb-close{width:36px; height:36px; border:1px solid rgba(245,245,247,.2); border-radius:50%; display:grid; place-items:center; transition:.3s}
+  .lb-close:hover{background:rgba(245,245,247,.14)}
+  .lb-stage{flex:1 1 0; display:grid; place-items:center; padding:0 clamp(10px,2vw,40px); min-height:0; overflow:hidden; position:relative}
+  .lb-stage img{max-width:100%; max-height:100%; object-fit:contain; border-radius:8px; box-shadow:0 40px 120px rgba(0,0,0,.6); transition:opacity .32s var(--ease), transform .5s var(--ease-2)}
+  .lb-stage img.swap{opacity:0; transform:translateY(14px) scale(.992)}
+  .lb-nav{position:absolute; top:50%; transform:translateY(-50%); width:50px; height:50px; border-radius:50%; display:grid; place-items:center; border:1px solid rgba(245,245,247,.18); background:rgba(255,255,255,.06); backdrop-filter:blur(10px); transition:.3s}
+  .lb-nav:hover{background:rgba(255,255,255,.16)}
+  .lb-nav.prev{left:clamp(8px,1.6vw,22px)} .lb-nav.next{right:clamp(8px,1.6vw,22px)}
+  .lb-nav svg{width:16px; height:16px; stroke:#F5F5F7; fill:none; stroke-width:1.6}
+  .lb-rail{flex:0 0 auto; display:flex; gap:8px; overflow-x:auto; padding:14px clamp(14px,2.4vw,30px) 20px; scrollbar-width:none}
+  .lb-rail::-webkit-scrollbar{display:none}
+  .lb-rail button{flex:0 0 94px; aspect-ratio:16/9; border-radius:6px; overflow:hidden; opacity:.36; transition:.3s; border:1px solid transparent}
+  .lb-rail button.on{opacity:1; border-color:rgba(245,245,247,.85)}
+  .lb-rail img{width:100%; height:100%; object-fit:cover}
+
+  /* ---------- reveal ---------- */
+  .reveal{opacity:0; transform:translateY(26px)}
+  .reveal.in{opacity:1; transform:none; transition:opacity 1s var(--ease), transform 1.2s var(--ease-2)}
+  .p-head .p-num,.p-head .p-title h3,.p-head .p-desc,.p-head .p-side{opacity:0; transform:translateY(18px)}
+  .p-head .p-num{transform:translateY(20px) translateY(var(--py,0px))}
+  .p-head.in .p-num{opacity:1; transform:translateY(var(--py,0px)); transition:opacity .9s var(--ease), transform 1.1s var(--ease-2)}
+  .p-head.in .p-title h3{opacity:1; transform:none; transition:opacity .9s var(--ease) .06s, transform 1.1s var(--ease-2) .06s}
+  .p-head.in .p-desc{opacity:1; transform:none; transition:opacity .9s var(--ease) .12s, transform 1.1s var(--ease-2) .12s}
+  .p-head.in .p-side{opacity:1; transform:none; transition:opacity .9s var(--ease) .18s, transform 1.1s var(--ease-2) .18s}
+
+  @media (max-width:900px){
+    #cur{display:none}
+    .p-head{grid-template-columns:1fr; gap:22px}
+    .p-side{margin-top:0}
+    .sec-head{grid-template-columns:1fr}
+    .sec-head .note{text-align:left}
+    .row{grid-template-columns:40px 1fr 28px; gap:14px}
+    .row .k{display:none}
+    .slide{flex-basis:88vw}
+    .hero-grid{grid-template-columns:1fr; gap:clamp(22px,4vh,34px)}
+    .hero-deck{border-radius:16px; max-width:560px}
+    .about-grid{grid-template-columns:1fr; gap:30px}
+    .hero h1 small{letter-spacing:.28em}
+    .nav{gap:16px; font-size:11.5px}
+    .brand span{display:none}
+    .deck{border-radius:24px; padding:10px}
+    .contact{border-radius:28px; margin:0 12px 12px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *{animation-duration:.001s !important; transition-duration:.001s !important}
+    .reveal{opacity:1; transform:none}
+    .contact h2 .ln span{transform:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="progress"><i id="bar"></i></div>
+
+<header class="topbar" id="topbar">
+  <a class="brand" href="#top"><b>刘晨阳</b><span>LIU CHENYANG</span></a>
+  <nav class="nav">
+    <a href="#works" data-nav="works">项目</a>
+    <a href="#about" data-nav="about">关于</a>
+    <a href="#contact" data-nav="contact">联系</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero" id="top">
+    <div class="aurora" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="hero-inner">
+      <div class="hero-grid">
+        <div class="hero-txt">
+          <p class="eyebrow">/ Portfolio 2026</p>
+          <h1>刘晨阳<small>LIU CHENYANG — VISUAL DESIGN</small></h1>
+          <p class="role">
+            <span class="l"><b>视觉设计师</b>（求职方向）</span>
+          </p>
+          <p class="hero-meta">苏州 / 中国 &nbsp;·&nbsp; 苏州科技大学 艺术设计硕士</p>
+        </div>
+        <figure class="hero-deck" id="heroDeck">
+          <div class="hd-track">
+            <img class="hd-img on" src="assets/p04.webp" alt="山野信号 · 2026 夏季户外信号节 主视觉">
+            <img class="hd-img" src="assets/p21.webp" alt="DAYFORM 日萃 · 精品咖啡品牌视觉">
+            <img class="hd-img" src="assets/p39.webp" alt="MALLOW PLANET · 棉花糖星球 IP 形象">
+            <img class="hd-img" src="assets/p62.webp" alt="MEOW EASY · 猫生活品牌海报">
+          </div>
+          <figcaption class="hd-bar">
+            <span class="hd-name"><b id="hd-num">01</b><span id="hd-txt">山野信号 · MOUNTAIN WILD SIGNAL</span></span>
+            <div class="hd-dots" id="hd-dots" role="tablist" aria-label="切换作品">
+              <button class="on" aria-label="山野信号"></button>
+              <button aria-label="DAYFORM 日萃"></button>
+              <button aria-label="MALLOW PLANET"></button>
+              <button aria-label="MEOW EASY"></button>
+            </div>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="ticker" aria-hidden="true">
+      <div id="ticker"></div>
+    </div>
+    <a class="scroll-cue" href="#works"><i></i>Scroll / 向下浏览</a>
+  </section>
+
+  <section id="works">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <p class="eyebrow">/ Selected Works</p>
+          <h2>精选项目</h2>
+        </div>
+        <p class="note">四个完整案例，按项目浏览。<br>点开任一页可逐页翻看。</p>
+      </div>
+      <ol class="index" id="index"></ol>
+    </div>
+  </section>
+
+  <div id="projects"></div>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <p class="eyebrow">/ About</p>
+          <h2>关于</h2>
+        </div>
+      </div>
+      <div class="about-grid">
+        <div class="about-txt">
+          <dl class="facts">
+            <div><dt>姓名</dt><dd>刘晨阳</dd></div>
+            <div><dt>院校</dt><dd>苏州科技大学 · 艺术设计硕士</dd></div>
+            <div><dt>时间</dt><dd>2023.9 — 2026.6</dd></div>
+            <div><dt>方向</dt><dd>数字媒体艺术</dd></div>
+          </dl>
+          <p>习惯先拆信息，再动图形：这个品牌要说什么、给谁看、在哪儿被看见，再决定标志、字体和颜色怎么长出来。</p>
+        </div>
+        <div class="about-side">
+          <h4>荣誉</h4>
+          <ul class="list-honor">
+            <li><i>01</i>东方创意之星创新设计大赛 · 全国铜奖</li>
+            <li><i>02</i>米兰设计周中国高校设计学科师生优秀作品展 · 全国二等奖</li>
+            <li><i>03</i>未来设计师 · 全国高校数字艺术设计大赛 · 江苏赛区三等奖</li>
+            <li><i>04</i>中国好创意暨全国数字艺术设计大赛 · 江苏赛区二等奖</li>
+            <li><i>05</i>中国包装创意设计大赛 · 三等奖</li>
+          </ul>
+          <h4>技能</h4>
+          <div class="skills chips">
+            <span>Photoshop</span><span>Illustrator</span><span>Lovart</span><span>ComfyUI</span><span>DeepSeek Harness</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <p class="eyebrow">/ Contact</p>
+      <h2><span class="ln"><span>一起做点</span></span><span class="ln"><span>看得见的设计。</span></span></h2>
+      <div class="contact-grid">
+        <div><span>求职意向</span><b>视觉设计师</b></div>
+        <div><span>擅长方向</span><b>品牌视觉 · IP 形象 · 包装</b></div>
+        <div><span>求职状态</span><b>应届 · 可即时到岗</b></div>
+      </div>
+      <footer>
+        <span>© 2026 刘晨阳 · 视觉设计作品集</span>
+        <a href="#top">回到顶部 ↑</a>
+      </footer>
+    </div>
+  </section>
+</main>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="逐页浏览">
+  <div class="lb-top">
+    <div class="info"><b id="lb-name"></b><span id="lb-count"></span></div>
+    <button class="lb-close" id="lb-close" aria-label="关闭">
+      <svg viewBox="0 0 24 24" width="15" height="15" stroke="#fff" fill="none" stroke-width="1.6"><path d="M5 5l14 14M19 5L5 19"/></svg>
+    </button>
+  </div>
+  <div class="lb-stage" id="lb-stage">
+    <button class="lb-nav prev" id="lb-prev" aria-label="上一页"><svg viewBox="0 0 24 24"><path d="M15 4l-8 8 8 8"/></svg></button>
+    <img id="lb-img" alt="">
+    <button class="lb-nav next" id="lb-next" aria-label="下一页"><svg viewBox="0 0 24 24"><path d="M9 4l8 8-8 8"/></svg></button>
+  </div>
+  <div class="lb-rail" id="lb-rail"></div>
+</div>
+
+<script>
+const PROJECTS = [
+  {
+    id:'mountain', num:'01', cn:'山野信号', en:'MOUNTAIN WILD SIGNAL',
+    start:3, end:19, accent:'#7FA05A',
+    desc:'为「2026 夏季户外信号节」建立的一整套视觉语言。以山谷、电波与露营物件构成图标系统，用高饱和色块把野外的自由感收进纸面，再延展到门票、旗帜、贴纸与户外广告。',
+    tags:['品牌标志','标准制图','色彩系统','辅助图形','票务系统','周边物料','户外广告'],
+    info:[['项目类型','户外音乐节 / 品牌视觉'],['时间地点','2026 夏季 · 云南香格里拉'],['交付内容','标志与图形系统、主视觉、门票、旗帜、贴纸、户外广告']]
+  },
+  {
+    id:'dayform', num:'02', cn:'DAYFORM 日萃', en:'DAILY COFFEE',
+    start:20, end:37, accent:'#2E51DB',
+    desc:'一个精品咖啡品牌的日常仪式感。标志把「DAY / FORM」的字形切进杯中轮廓，配合一套单线插画系统，将「从豆到杯」的过程画成可复用的语言，落进纸杯、提袋与门店物料。',
+    tags:['品牌标志','插画系统','包装设计','纸盒结构','门店物料'],
+    info:[['项目类型','精品咖啡 / 品牌视觉'],['品牌主张','Design your daily coffee ritual'],['交付内容','标志、色彩、插画系统、包装与门店物料']]
+  },
+  {
+    id:'mallow', num:'03', cn:'MALLOW PLANET', en:'棉花糖星球',
+    start:38, end:58, accent:'#9C7BE0',
+    desc:'一个「柔软，从来不是脆弱」的 IP。从人设设定、三视图到 3D 建模与八套配色变体，同一个形象在不同情绪场景里被重新解释，再长成挂件与周边。',
+    tags:['IP 设定','三视图','3D 建模','色彩变体','场景海报','挂件周边'],
+    info:[['项目类型','IP 形象设计'],['系列','草莓 / 抹茶 / 蓝莓 / 椰子 / 阳光 / 梦幻 / 繁华 / 深夜'],['交付内容','人设、三视图、3D 建模、配色系统、场景海报、周边']]
+  },
+  {
+    id:'meow', num:'04', cn:'MEOW EASY', en:'CAT LIFESTYLE BRAND',
+    start:59, end:69, accent:'#E8B32F',
+    desc:'以一只白猫为核心的猫咪生活方式品牌。高对比色块与手绘线条，把「慢下来」做成可以买回家的东西——从插画、表情包到帆布袋、马克杯与周边文创。',
+    tags:['品牌视觉','插画','周边文创'],
+    info:[['项目类型','猫咪生活方式品牌'],['品牌主张','A softer life with cats'],['交付内容','识别系统、插画、商品设计']]
+  }
+];
+
+const pad = n => String(n).padStart(2,'0');
+const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* ---------- ticker (scroll-reactive marquee) ---------- */
+(() => {
+  const words = ['山野信号','DAYFORM 日萃','MALLOW PLANET','MEOW EASY','品牌视觉','IP 形象','包装系统','视觉系统'];
+  const once = words.map(w => `<span>${w}</span>`).join('');
+  const el = document.getElementById('ticker');
+  el.innerHTML = once + once;
+  if (matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+
+  let x = 0, boost = 0, last = performance.now(), lastY = scrollY, half = el.scrollWidth / 2;
+  addEventListener('resize', () => { half = el.scrollWidth / 2; }, {passive:true});
+  addEventListener('scroll', () => {
+    const dy = scrollY - lastY; lastY = scrollY;
+    boost = Math.min(1.5, boost + Math.abs(dy) * 0.012);
+  }, {passive:true});
+
+  const loop = (t) => {
+    const dt = Math.min(64, t - last); last = t;
+    boost *= 0.9;
+    x -= (0.032 + boost) * dt;
+    if (x <= -half) x += half;
+    el.style.transform = `translate3d(${x.toFixed(2)}px,0,0)`;
+    requestAnimationFrame(loop);
+  };
+  requestAnimationFrame(loop);
+})();
+
+/* ---------- index ---------- */
+(() => {
+  const el = document.getElementById('index');
+  el.innerHTML = PROJECTS.map((p, i) => `
+    <li class="row" data-i="${i}">
+      <span class="n">${p.num}</span>
+      <span class="t"><b>${p.cn}</b><em>${p.en}</em></span>
+      <span class="k">${p.tags.slice(0,3).join(' · ')}</span>
+      <span class="go">↘</span>
+    </li>`).join('');
+  el.addEventListener('click', e => {
+    const row = e.target.closest('.row');
+    if (row) document.getElementById(PROJECTS[+row.dataset.i].id).scrollIntoView({behavior:'smooth', block:'start'});
+  });
+
+  /* hover preview that follows the cursor (desktop only) */
+  if (matchMedia('(hover:hover) and (min-width:901px)').matches) {
+    const peek = document.createElement('div');
+    peek.id = 'peek';
+    peek.innerHTML = '<img alt="">';
+    document.body.appendChild(peek);
+    const img = peek.firstChild;
+    let raf = null, x = 0, y = 0;
+    el.addEventListener('pointerenter', e => {
+      const row = e.target.closest('.row'); if (!row) return;
+      const p = PROJECTS[+row.dataset.i];
+      if (img.dataset.src !== p.id) { img.src = `assets/t${pad(p.start)}.webp`; img.dataset.src = p.id; }
+      peek.classList.add('on');
+    }, true);
+    el.addEventListener('pointerleave', () => peek.classList.remove('on'), true);
+    el.addEventListener('pointermove', e => {
+      x = e.clientX; y = e.clientY;
+      if (raf) return;
+      raf = requestAnimationFrame(() => { peek.style.left = x + 'px'; peek.style.top = y + 'px'; raf = null; });
+    });
+  }
+})();
+
+/* ---------- project sections ---------- */
+(() => {
+  const host = document.getElementById('projects');
+  host.innerHTML = PROJECTS.map((p, i) => {
+    const slides = [];
+    for (let n = p.start; n <= p.end; n++) {
+      const k = n - p.start + 1;
+      slides.push(`<figure class="slide" data-i="${pad(k)}" data-n="${n}">
+        <img src="assets/p${pad(n)}.webp" alt="${esc(p.cn)} 第 ${k} 页" loading="lazy" decoding="async">
+      </figure>`);
+    }
+    return `<section class="project" id="${p.id}" data-i="${i}">
+      <div class="wrap">
+        <div class="p-head reveal">
+          <div>
+            <div class="p-num" style="color:${p.accent}">${p.num}</div>
+            <div class="p-title">
+              <h3>${p.cn}</h3>
+              <span class="en">${p.en}</span>
+            </div>
+            <p class="p-desc">${p.desc}</p>
+          </div>
+          <div class="p-side">
+            ${p.info.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}
+            <dt>关键词</dt>
+            <dd><div class="chips">${p.tags.map(t => `<span>${t}</span>`).join('')}</div></dd>
+          </div>
+        </div>
+        <div class="deck" data-i="${i}">
+          <div class="deck-track">${slides.join('')}</div>
+          <div class="deck-bar">
+            <span class="cnt">01 / ${slides.length}</span>
+            <div class="track"><i></i></div>
+            <span class="hint">拖拽 / 点击放大</span>
+            <div class="arrows">
+              <button data-dir="-1" aria-label="上一页"><svg viewBox="0 0 24 24"><path d="M15 4l-8 8 8 8"/></svg></button>
+              <button data-dir="1" aria-label="下一页"><svg viewBox="0 0 24 24"><path d="M9 4l8 8-8 8"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>`;
+  }).join('');
+
+  host.querySelectorAll('.deck').forEach(deck => {
+    const track = deck.querySelector('.deck-track');
+    const slides = [...track.children];
+    const cnt = deck.querySelector('.cnt');
+    const bar = deck.querySelector('.track i');
+    let queued = false;
+
+    const current = () => {
+      const mid = track.scrollLeft + track.clientWidth / 2;
+      let best = 0, bd = Infinity;
+      slides.forEach((s, i) => {
+        const c = s.offsetLeft + s.offsetWidth / 2;
+        const d = Math.abs(c - mid);
+        if (d < bd) { bd = d; best = i; }
+      });
+      return best;
+    };
+    const refresh = () => {
+      queued = false;
+      const i = current();
+      cnt.textContent = `${pad(i + 1)} / ${slides.length}`;
+      slides.forEach((s, k) => s.classList.toggle('is-on', k === i));
+      const max = track.scrollWidth - track.clientWidth;
+      bar.style.width = (max > 0 ? (track.scrollLeft / max) * 100 : 0) + '%';
+    };
+    refresh();
+    track.addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(refresh); } }, {passive:true});
+
+    /* --- smooth paging: eased snap, inertial drag, wheel stepping --- */
+    let down = false, sx = 0, sl = 0, moved = 0, lx = 0, lt = 0, vel = 0, raf = 0, snapT = 0, wheelLock = 0;
+    const slideLeft = i => slides[i].offsetLeft - (track.clientWidth - slides[i].offsetWidth) / 2;
+
+    const centerTo = i => {
+      const idx = Math.min(slides.length - 1, Math.max(0, i));
+      clearTimeout(snapT);
+      track.classList.remove('dragging');
+      track.classList.add('gliding');           /* hold snap off while we slide, so it never fights */
+      track.scrollTo({left: slideLeft(idx), behavior:'smooth'});
+      snapT = setTimeout(() => track.classList.remove('gliding'), 700);
+    };
+
+    deck.querySelectorAll('.arrows button').forEach(b => b.addEventListener('click', () => {
+      centerTo(current() + (+b.dataset.dir));
+    }));
+
+    track.addEventListener('pointerdown', e => {
+      if (e.pointerType === 'touch') return;
+      if (raf) { cancelAnimationFrame(raf); raf = 0; }
+      down = true; moved = 0; sx = e.clientX; sl = track.scrollLeft;
+      lx = e.clientX; lt = performance.now(); vel = 0;
+      track.classList.add('dragging');
+      try { track.setPointerCapture(e.pointerId); } catch (_) {}
+    });
+
+    track.addEventListener('pointermove', e => {
+      if (!down) return;
+      const now = performance.now();
+      moved = Math.max(moved, Math.abs(e.clientX - sx));
+      track.scrollLeft = sl - (e.clientX - sx);
+      vel = (e.clientX - lx) / Math.max(8, now - lt);   /* px per ms */
+      lx = e.clientX; lt = now;
+    });
+
+    const release = () => {
+      if (!down) return;
+      down = false;
+      let v = -vel * 15;                         /* flick → px per frame */
+      const glide = () => {
+        if (Math.abs(v) < .5) {
+          raf = 0;
+          if (moved < 6) { track.classList.remove('dragging'); return; }   /* a plain click, no snap needed */
+          centerTo(current());
+          return;
+        }
+        track.scrollLeft += v; v *= .93;
+        raf = requestAnimationFrame(glide);
+      };
+      if (Math.abs(v) > 1.2) raf = requestAnimationFrame(glide);
+      else if (moved >= 6) centerTo(current());
+      else track.classList.remove('dragging');
+    };
+    track.addEventListener('pointerup', release);
+    track.addEventListener('pointercancel', release);
+    track.addEventListener('pointerleave', release);
+
+    /* vertical wheel over the deck pages through the slides; page keeps scrolling at the ends */
+    track.addEventListener('wheel', e => {
+      if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;      /* let horizontal gestures be native */
+      if (Math.abs(e.deltaY) < 4) return;
+      const target = current() + (e.deltaY > 0 ? 1 : -1);
+      const now = performance.now();
+      if (now < wheelLock) { e.preventDefault(); return; }       /* swallow the tail of one gesture */
+      if (target < 0 || target >= slides.length) return;         /* at either end: scroll the page */
+      e.preventDefault();
+      wheelLock = now + 560;
+      centerTo(target);
+    }, {passive:false});
+
+    track.addEventListener('click', e => {
+      const fig = e.target.closest('.slide');
+      if (!fig || moved > 6) return;
+      const local = slides.indexOf(fig);
+      openLB(+deck.dataset.i, local);
+    });
+  });
+
+  /* arrows keyboard support when a deck has focus */
+  host.querySelectorAll('.deck-track').forEach(t => {
+    t.tabIndex = 0;
+    t.addEventListener('keydown', e => {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      e.preventDefault();
+      const deck = t.closest('.deck');
+      const btn = deck.querySelector(`.arrows button[data-dir="${e.key === 'ArrowLeft' ? -1 : 1}"]`);
+      btn.click();
+    });
+  });
+})();
+
+/* ---------- lightbox ---------- */
+const lb = document.getElementById('lb');
+const lbImg = document.getElementById('lb-img');
+const lbName = document.getElementById('lb-name');
+const lbCount = document.getElementById('lb-count');
+const lbRail = document.getElementById('lb-rail');
+let lbState = {p:0, i:0};
+
+function pagesOf(p) {
+  const out = [];
+  for (let n = p.start; n <= p.end; n++) out.push(n);
+  return out;
+}
+function openLB(pi, idx) {
+  lbState = {p:pi, i:idx};
+  const p = PROJECTS[pi], pages = pagesOf(p);
+  lbName.textContent = p.cn;
+  lbRail.innerHTML = pages.map((n, k) =>
+    `<button data-k="${k}" class="${k === idx ? 'on' : ''}" aria-label="第 ${k+1} 页"><img src="assets/t${pad(n)}.webp" alt="" loading="lazy"></button>`
+  ).join('');
+  render(false);
+  lb.classList.add('on');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('lb-close').focus();
+}
+function render(animate = true) {
+  const p = PROJECTS[lbState.p], pages = pagesOf(p);
+  lbState.i = (lbState.i + pages.length) % pages.length;
+  const src = `assets/p${pad(pages[lbState.i])}.webp`;
+  const alt = `${p.cn} 第 ${lbState.i + 1} 页`;
+  if (!animate) { lbImg.src = src; lbImg.alt = alt; lbImg.classList.remove('swap'); }
+  else {
+    lbImg.classList.add('swap');
+    const pre = new Image();
+    pre.onload = () => {
+      lbImg.src = src; lbImg.alt = alt;
+      requestAnimationFrame(() => lbImg.classList.remove('swap'));
+    };
+    pre.src = src;
+  }
+  lbCount.textContent = `${pad(lbState.i + 1)} / ${pages.length}`;
+  lbRail.querySelectorAll('button').forEach((b, k) => b.classList.toggle('on', k === lbState.i));
+  const active = lbRail.querySelector('button.on');
+  if (active) active.scrollIntoView({behavior: animate ? 'smooth' : 'auto', block:'nearest', inline:'center'});
+}
+function closeLB() {
+  lb.classList.remove('on');
+  document.body.style.overflow = '';
+}
+document.getElementById('lb-close').addEventListener('click', closeLB);
+document.getElementById('lb-prev').addEventListener('click', () => { lbState.i--; render(); });
+document.getElementById('lb-next').addEventListener('click', () => { lbState.i++; render(); });
+lbRail.addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  lbState.i = +b.dataset.k; render();
+});
+lb.addEventListener('click', e => { if (e.target === lb || e.target.id === 'lb-stage') closeLB(); });
+addEventListener('keydown', e => {
+  if (!lb.classList.contains('on')) return;
+  if (e.key === 'Escape') closeLB();
+  else if (e.key === 'ArrowLeft') { lbState.i--; render(); }
+  else if (e.key === 'ArrowRight') { lbState.i++; render(); }
+});
+
+/* ---------- chrome: progress, nav state, reveal ---------- */
+(() => {
+  const bar = document.getElementById('bar');
+  const topbar = document.getElementById('topbar');
+  const onScroll = () => {
+    const h = document.documentElement;
+    const max = h.scrollHeight - h.clientHeight;
+    bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+    topbar.classList.toggle('solid', h.scrollTop > 40);
+  };
+  addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  }), {rootMargin:'-8% 0px -12% 0px'});
+  document.querySelectorAll('.reveal, .p-head, .sec-head, .about-grid').forEach(el => {
+    el.classList.add('reveal'); io.observe(el);
+  });
+  document.querySelectorAll('.sec-head, .p-head').forEach(el => el.classList.remove('reveal'));
+
+  /* contact headline: line-by-line mask */
+  const contact = document.getElementById('contact');
+  new IntersectionObserver((es, ob) => es.forEach(e => {
+    if (e.isIntersecting) { contact.classList.add('in'); ob.disconnect(); }
+  }), {rootMargin:'-18% 0px -22% 0px'}).observe(contact);
+
+  /* project numbers: slow parallax */
+  const nums = [...document.querySelectorAll('.p-num')];
+  if (nums.length && !matchMedia('(prefers-reduced-motion:reduce)').matches) {
+    let ticking = false;
+    const par = () => {
+      ticking = false;
+      const mid = innerHeight / 2;
+      nums.forEach(el => {
+        const r = el.getBoundingClientRect();
+        if (r.bottom < -240 || r.top > innerHeight + 240) return;
+        const d = (r.top + r.height / 2 - mid) / innerHeight;
+        el.style.setProperty('--py', (d * -24).toFixed(1) + 'px');
+      });
+    };
+    addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(par); } }, {passive:true});
+    par();
+  }
+
+  /* cursor dot */
+  if (matchMedia('(hover:hover) and (pointer:fine)').matches && !matchMedia('(prefers-reduced-motion:reduce)').matches) {
+    const cur = document.createElement('div');
+    cur.id = 'cur';
+    document.body.appendChild(cur);
+    let tx = innerWidth / 2, ty = innerHeight / 2, cx = tx, cy = ty;
+    addEventListener('pointermove', e => { tx = e.clientX; ty = e.clientY; cur.classList.add('on'); }, {passive:true});
+    addEventListener('pointerleave', () => cur.classList.remove('on'));
+    const follow = () => {
+      cx += (tx - cx) * 0.2; cy += (ty - cy) * 0.2;
+      cur.style.transform = `translate3d(${cx.toFixed(1)}px,${cy.toFixed(1)}px,0) translate(-50%,-50%)`;
+      requestAnimationFrame(follow);
+    };
+    requestAnimationFrame(follow);
+    document.addEventListener('pointerover', e => {
+      cur.classList.toggle('big', !!(e.target.closest && e.target.closest('a,button,.slide,.row,.portrait')));
+    }, {passive:true});
+  }
+
+  /* ---------- hero deck: four covers, auto-rotate + dots + click ---------- */
+  const deckEl = document.getElementById('heroDeck');
+  if (deckEl) {
+    const hImgs = [...deckEl.querySelectorAll('.hd-img')];
+    const hDots = [...deckEl.querySelectorAll('.hd-dots button')];
+    const hNum = document.getElementById('hd-num');
+    const hTxt = document.getElementById('hd-txt');
+    const LABELS = [
+      '山野信号 · MOUNTAIN WILD SIGNAL',
+      'DAYFORM 日萃 · DAILY COFFEE',
+      'MALLOW PLANET · 棉花糖星球',
+      'MEOW EASY · CAT LIFESTYLE BRAND'
+    ];
+    let hi = 0, hTimer = 0;
+    const hGo = n => {
+      hi = (n + hImgs.length) % hImgs.length;
+      hImgs.forEach((el, k) => el.classList.toggle('on', k === hi));
+      hDots.forEach((el, k) => el.classList.toggle('on', k === hi));
+      hNum.textContent = '0' + (hi + 1);
+      hTxt.textContent = LABELS[hi];
+    };
+    const hStop = () => { if (hTimer) { clearInterval(hTimer); hTimer = 0; } };
+    const hPlay = () => { hStop(); hTimer = setInterval(() => hGo(hi + 1), 5200); };
+    hDots.forEach((d, k) => d.addEventListener('click', e => { e.stopPropagation(); hGo(k); hPlay(); }));
+    deckEl.querySelector('.hd-track').addEventListener('click', () => { hGo(hi + 1); hPlay(); });
+    deckEl.addEventListener('mouseenter', hStop);
+    deckEl.addEventListener('mouseleave', hPlay);
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) hPlay();
+  }
+
+  /* ---------- fit the latin line to the exact width of the name ---------- */
+  (() => {
+    const h1 = document.querySelector('.hero h1');
+    if (!h1) return;
+    const en = h1.querySelector('small');
+    if (!en) return;
+    const nameNode = [...h1.childNodes].find(n => n.nodeType === 3 && n.textContent.trim());
+    if (!nameNode) return;
+    const fit = () => {
+      en.style.letterSpacing = '';
+      en.style.marginRight = '';
+      if (matchMedia('(max-width: 640px)').matches) return;   /* narrow screens keep the natural tracking */
+      en.style.letterSpacing = '0px';
+      const rn = document.createRange(); rn.selectNodeContents(nameNode);
+      const re = document.createRange(); re.selectNodeContents(en);
+      const target = rn.getBoundingClientRect().width;
+      const natural = re.getBoundingClientRect().width;
+      const n = en.textContent.length;
+      if (!target || !natural || n < 2) return;
+      const sp = Math.max((target - natural) / (n - 1), -1.4);
+      en.style.letterSpacing = sp.toFixed(2) + 'px';
+      en.style.marginRight = (-sp).toFixed(2) + 'px';
+    };
+    fit();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+    let rt = 0;
+    addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(fit, 120); });
+  })();
+
+  const links = [...document.querySelectorAll('[data-nav]')];
+  const map = {works:document.getElementById('works'), about:document.getElementById('about'), contact:document.getElementById('contact')};
+  const navIO = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('on', map[a.dataset.nav] === e.target));
+  }), {rootMargin:'-45% 0px -50% 0px'});
+  Object.values(map).forEach(s => navIO.observe(s));
+})();
+</script>
+</body>
+</html>
